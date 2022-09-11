@@ -23,6 +23,7 @@ import { AiOutlineSend } from 'react-icons/ai';
 import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
 import { FiUsers } from 'react-icons/fi';
 import Moment from 'moment';
+export const { REACT_APP_API_URL } = process.env;
 export interface MessageInterface {
   username: string;
   message: string;
@@ -34,6 +35,8 @@ export const Message = () => {
   const bg = useColorModeValue('gray.100', 'whiteAlpha.100');
   const bg2 = useColorModeValue('gray.200', 'whiteAlpha.100');
   const bg3 = useColorModeValue('gray.200', 'whiteAlpha.50');
+
+  console.log(REACT_APP_API_URL);
   const [text, setText] = useState<string>('');
   const toast = useToast();
   const { username } = useContext(UsernameContext);
@@ -50,7 +53,7 @@ export const Message = () => {
   }, []);
 
   useEffect(() => {
-    const newSocket = io('http://localhost:8001');
+    const newSocket = io(REACT_APP_API_URL!);
     setSocket(newSocket);
   }, [setSocket]);
   const messageListener = async (data: MessageInterface) => {
@@ -118,10 +121,9 @@ export const Message = () => {
               <Spacer />
               <Button
                 display={{ base: 'none', md: 'block' }}
-                leftIcon={<HiOutlineArrowNarrowLeft />}
                 colorScheme='teal'
               >
-                Leave Room
+                Leave
               </Button>
             </HStack>
 
