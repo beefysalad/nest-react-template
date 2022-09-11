@@ -9,14 +9,15 @@ import {
 export class ChatGateway {
   @WebSocketServer()
   server;
-
   @SubscribeMessage('message')
-  handleMessage(
-    @MessageBody() message: string,
-    client: any,
-    payload: any,
-  ): void {
-    console.log(message);
-    this.server.emit('message', message);
+  handleMessage(@MessageBody() data: string): void {
+    // console.log(data);
+
+    this.server.emit('message', data);
+  }
+  @SubscribeMessage('username')
+  handleUsername(@MessageBody() username: string): void {
+    // console.log(username);
+    this.server.emit('username', username);
   }
 }

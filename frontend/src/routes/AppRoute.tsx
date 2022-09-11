@@ -5,7 +5,7 @@ export const AppRoute = () => {
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />
-      <Route path='/messageTest' element={<Message />} />
+      <Route path='/message' element={<Message />} />
     </Routes>
   );
 };

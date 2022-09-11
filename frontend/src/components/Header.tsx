@@ -1,8 +1,5 @@
 import {
-  Avatar,
   Box,
-  Button,
-  Divider,
   Drawer,
   DrawerBody,
   DrawerContent,
@@ -10,32 +7,30 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
-  FormControl,
-  FormLabel,
   Heading,
   HStack,
   IconButton,
   Image,
-  Input,
   Link,
   Spacer,
-  Textarea,
   Tooltip,
   useColorMode,
   useColorModeValue,
   useDisclosure,
-  VStack,
 } from '@chakra-ui/react';
 import { MdInvertColors } from 'react-icons/md';
 import logo from '../assets/logo.png';
 
 import { BiMenu } from 'react-icons/bi';
 import { AiOutlineClose } from 'react-icons/ai';
+import { UsernameContext } from '../providers/AppProviders';
+import { useContext } from 'react';
 function Header() {
   const BEEFY_GITHUB_URL = 'https://github.com/beefysalad';
   const { colorMode, toggleColorMode } = useColorMode();
   const bg = useColorModeValue('gray.50', 'gray.800');
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { username } = useContext(UsernameContext);
   return (
     <>
       <Box
@@ -51,6 +46,7 @@ function Header() {
           <Box>
             <Heading size='md'>
               <HStack>
+                <Image src={logo} alt='logo' boxSize='40px' />
                 <Link href='/' _hover={{ underline: 'none' }}>
                   BeefySalad
                 </Link>
@@ -94,7 +90,7 @@ function Header() {
             </HStack>
           </DrawerHeader>
           <DrawerBody>
-            <Heading>Test</Heading>
+            <Heading textAlign='center'>Hi {username}</Heading>
           </DrawerBody>
           <DrawerFooter>
             <IconButton
