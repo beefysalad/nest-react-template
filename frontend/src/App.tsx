@@ -1,11 +1,14 @@
 import AppLayout from './components/AppLayout';
-import { LandingPage } from './components/LandingPage';
+import { AppProvider } from './providers/AppProviders';
+import { AppRoute } from './routes/AppRoute';
 
 function App() {
   return (
-    <AppLayout>
-      <LandingPage />
-    </AppLayout>
+    <AppProvider>
+      <AppLayout>
+        <AppRoute />
+      </AppLayout>
+    </AppProvider>
   );
 }
 export default App;
