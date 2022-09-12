@@ -28,7 +28,8 @@ import { useContext } from 'react';
 function Header() {
   const BEEFY_GITHUB_URL = 'https://github.com/beefysalad';
   const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue('gray.50', 'gray.800');
+  const bg = useColorModeValue('gray.50', 'blackAlpha.900');
+  const bg2 = useColorModeValue('gray.50', 'blackAlpha.700');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { username } = useContext(UsernameContext);
   return (
@@ -41,6 +42,7 @@ function Header() {
         left='0'
         bg={bg}
         boxShadow='lg'
+        outlineColor='red'
       >
         <Flex alignItems='center' px={{ base: '3', md: '5', lg: '8' }} py='3'>
           <Box>
@@ -83,16 +85,16 @@ function Header() {
       <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader>
+          <DrawerHeader bg={bg2}>
             <HStack>
               <Image src={logo} h='10' />
               <Heading size='md'>BeefySalad</Heading>
             </HStack>
           </DrawerHeader>
-          <DrawerBody>
+          <DrawerBody bg={bg2}>
             <Heading textAlign='center'>Hi {username}</Heading>
           </DrawerBody>
-          <DrawerFooter>
+          <DrawerFooter bg={bg2}>
             <IconButton
               aria-label='open menu'
               icon={<AiOutlineClose />}
