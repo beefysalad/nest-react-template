@@ -42,7 +42,6 @@ function Header() {
         left='0'
         bg={bg}
         boxShadow='lg'
-        outlineColor='red'
       >
         <Flex alignItems='center' px={{ base: '3', md: '5', lg: '8' }} py='3'>
           <Box>

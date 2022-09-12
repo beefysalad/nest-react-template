@@ -11,13 +11,10 @@ export class ChatGateway {
   server;
   @SubscribeMessage('message')
   handleMessage(@MessageBody() data: string): void {
-    // console.log(data);
-
     this.server.emit('message', data);
   }
   @SubscribeMessage('username')
   handleUsername(@MessageBody() username: string): void {
-    // console.log(username);
     this.server.emit('username', username);
   }
 }

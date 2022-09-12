@@ -23,7 +23,7 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import patrick from '../assets/patrek.jpeg';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import io, { Socket } from 'socket.io-client';
 import { UsernameContext } from '../providers/AppProviders';
 import { useNavigate } from 'react-router-dom';
@@ -47,7 +47,7 @@ export const Message = () => {
   const [text, setText] = useState<string>('');
   const toast = useToast();
   const { username } = useContext(UsernameContext);
-
+  const messageRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const sendMessage = (message: string, username: string) => {
     const date = Moment(new Date()).calendar();
@@ -92,6 +92,9 @@ export const Message = () => {
     } else {
       setText('');
       sendMessage(text, username);
+      setTimeout(() => {
+        messageRef.current!.scrollTop = messageRef.current!.scrollHeight;
+      }, 500);
     }
   };
   useEffect(() => {
@@ -110,7 +113,7 @@ export const Message = () => {
         bg={bg}
         width={{ base: '100%', md: '50%' }}
         mx='auto'
-        my='5rem'
+        my='2rem'
         rounded='15'
         overflow='hidden'
       >
@@ -128,9 +131,11 @@ export const Message = () => {
               <Button
                 display={{ base: 'none', md: 'block' }}
                 colorScheme='teal'
+                onClick={() => navigate('/')}
               >
                 Leave
               </Button>
+              <Button>Clear</Button>
             </HStack>
 
             <Text>#pakyutopi</Text>
@@ -138,7 +143,7 @@ export const Message = () => {
           <HStack>
             <Box
               h='25rem'
-              maxH='24rem'
+              maxH='25rem'
               maxW='10rem'
               w='100%'
               padding='1rem'
@@ -154,11 +159,13 @@ export const Message = () => {
               <Text>Todo hehe</Text>
             </Box>
             <Box
-              overflowY='scroll'
+              overflowY='auto'
               h='25rem'
               maxH='24rem'
               padding='2rem'
               w='100%'
+              scrollBehavior='smooth'
+              ref={messageRef}
             >
               {messages.map((message, index) => {
                 return (

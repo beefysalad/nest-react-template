@@ -13,7 +13,7 @@ const theme = extendTheme(config, {
       body: {
         color: mode('gray.800', 'whiteAlpha.900')(props),
         // bg: mode('gray.50', 'gray.800')(props),
-        bg: mode('gray.50', 'blackAlpha.800')(props),
+        bg: mode('gray.50', 'blackAlpha.900')(props),
       },
     }),
   },
@@ -31,7 +31,7 @@ const theme = extendTheme(config, {
             _focus: {
               borderColor: 'teal.500',
             },
-            bg: mode('gray.300', 'whiteAlpha.100')(props),
+            bg: mode('gray.300', 'whiteAlpha.200')(props),
           },
         }),
       },
