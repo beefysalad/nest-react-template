@@ -13,6 +13,14 @@ import {
   Spacer,
   Image,
   Avatar,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverHeader,
+  IconButton,
 } from '@chakra-ui/react';
 import patrick from '../assets/patrek.jpeg';
 import { useEffect, useState, useContext } from 'react';
@@ -20,8 +28,9 @@ import io, { Socket } from 'socket.io-client';
 import { UsernameContext } from '../providers/AppProviders';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineSend } from 'react-icons/ai';
-import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
 import { FiUsers } from 'react-icons/fi';
+import { BsEmojiLaughing } from 'react-icons/bs';
+import Picker from 'emoji-picker-react';
 import Moment from 'moment';
 export const { REACT_APP_API_URL } = process.env;
 export interface MessageInterface {
@@ -35,8 +44,6 @@ export const Message = () => {
   const bg = useColorModeValue('gray.100', 'whiteAlpha.100');
   const bg2 = useColorModeValue('gray.200', 'whiteAlpha.100');
   const bg3 = useColorModeValue('gray.200', 'whiteAlpha.50');
-
-  console.log(REACT_APP_API_URL);
   const [text, setText] = useState<string>('');
   const toast = useToast();
   const { username } = useContext(UsernameContext);
@@ -51,7 +58,9 @@ export const Message = () => {
       navigate('/');
     }
   }, []);
-
+  const onEmojiClick = (event: any, emojiObject: any) => {
+    setText(text + emojiObject.emoji);
+  };
   useEffect(() => {
     const newSocket = io(REACT_APP_API_URL!);
     setSocket(newSocket);
@@ -64,7 +73,6 @@ export const Message = () => {
       title: `${user} has connected`,
       status: 'success',
       position: 'top-right',
-      variant: 'subtle',
       duration: 9000,
       isClosable: true,
     });
@@ -79,7 +87,6 @@ export const Message = () => {
         duration: 3000,
         isClosable: true,
         position: 'bottom',
-        variant: 'subtle',
       });
       return;
     } else {
@@ -98,10 +105,9 @@ export const Message = () => {
 
   return (
     <Box>
-      <Heading textAlign='center'>Messages for {username}</Heading>
+      <Heading textAlign='center'>#SurpassingLimitsSince2022</Heading>
       <Box
         bg={bg}
-        // width='50%'
         width={{ base: '100%', md: '50%' }}
         mx='auto'
         my='5rem'
@@ -194,6 +200,25 @@ export const Message = () => {
                   placeholder='Enter your message here...'
                   variant='filled'
                 />
+                <Popover>
+                  <PopoverTrigger>
+                    <IconButton
+                      variant='ghost'
+                      colorScheme='teal'
+                      aria-label='pop emoji'
+                      icon={<BsEmojiLaughing />}
+                    />
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <PopoverArrow />
+                    <PopoverBody>
+                      <Picker
+                        onEmojiClick={onEmojiClick}
+                        pickerStyle={{ width: '100%' }}
+                      />
+                    </PopoverBody>
+                  </PopoverContent>
+                </Popover>
                 <Button
                   leftIcon={<AiOutlineSend />}
                   colorScheme='teal'

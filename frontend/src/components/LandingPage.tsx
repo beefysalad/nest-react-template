@@ -38,7 +38,8 @@ export const LandingPage = () => {
     };
     getApi();
   }, [data]);
-  const handleButtonClick = (): void => {
+  const handleButtonClick = (e: any): void => {
+    e.preventDefault();
     if (text.length <= 0) {
       toast({
         title: 'Failed',
@@ -47,7 +48,6 @@ export const LandingPage = () => {
         duration: 3000,
         isClosable: true,
         position: 'bottom-right',
-        variant: 'subtle',
       });
     } else {
       socket?.emit('username', text);
@@ -64,23 +64,24 @@ export const LandingPage = () => {
         justifyContent='center'
         flexDirection='column'
         mt='2rem'
-        width='100%'
       >
-        <VStack width='70%'>
-          <Input
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            variant='filled'
-            placeholder='Enter your username'
-          />
-          <Button
-            onClick={handleButtonClick}
-            colorScheme='teal'
-            variant='outline'
-          >
-            Enter Chat Room
-          </Button>
-        </VStack>
+        <form onSubmit={handleButtonClick}>
+          <VStack>
+            <Input
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              variant='filled'
+              placeholder='Enter your username'
+            />
+            <Button
+              onClick={handleButtonClick}
+              colorScheme='teal'
+              variant='outline'
+            >
+              Enter Chat Room
+            </Button>
+          </VStack>
+        </form>
       </Flex>
     </Box>
   );

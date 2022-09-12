@@ -10,7 +10,7 @@ const Footer = ({ children }: FooterProps) => {
         <Text fontSize='xs'>
           Copyright &copy; 2022 :{' '}
           <Link
-            href='https://github.com/beefysalad/ts-todo-application'
+            href='https://github.com/beefysalad/nest-react-template'
             target='_blank'
           >
             Saladu
