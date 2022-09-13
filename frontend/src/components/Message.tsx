@@ -126,19 +126,30 @@ export const Message = () => {
                 boxSize='40px'
                 rounded='100%'
               />
-              <Heading>Saladus Chat Room</Heading>
+              <Heading textAlign={{ base: 'center' }}>
+                Saladus Chat Room
+              </Heading>
               <Spacer />
               <Button
                 display={{ base: 'none', md: 'block' }}
                 colorScheme='teal'
                 onClick={() => navigate('/')}
+                px='6'
               >
                 Leave
               </Button>
-              <Button>Clear</Button>
+              <Button
+                display={{ base: 'none', md: 'block' }}
+                colorScheme='teal'
+                variant='outline'
+                onClick={() => setMessages([])}
+                px='6'
+              >
+                Clear
+              </Button>
             </HStack>
 
-            <Text>#pakyutopi</Text>
+            <Text display={{ base: 'none', md: 'block' }}>#pakyutopi</Text>
           </Box>
           <HStack>
             <Box
@@ -178,6 +189,7 @@ export const Message = () => {
                         p='1rem'
                         borderRadius='1rem'
                         w='100%'
+                        maxW='30rem'
                       >
                         <HStack>
                           <Text as='b' fontSize='xl'>
@@ -231,6 +243,7 @@ export const Message = () => {
                   colorScheme='teal'
                   variant='outline'
                   onClick={handleButtonClick}
+                  px='6'
                 >
                   Send
                 </Button>
