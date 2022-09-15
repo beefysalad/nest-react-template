@@ -48,6 +48,7 @@ export const Message = () => {
   const toast = useToast();
   const { username } = useContext(UsernameContext);
   const messageRef = useRef<HTMLDivElement>(null);
+
   const navigate = useNavigate();
   const sendMessage = (message: string, username: string) => {
     const date = Moment(new Date()).calendar();
@@ -58,16 +59,18 @@ export const Message = () => {
       navigate('/');
     }
   }, []);
-  const onEmojiClick = (event: any, emojiObject: any) => {
+  const onEmojiClick = (emojiObject: any) => {
     setText(text + emojiObject.emoji);
   };
   useEffect(() => {
     const newSocket = io(REACT_APP_API_URL!);
     setSocket(newSocket);
   }, [setSocket]);
+
   const messageListener = async (data: MessageInterface) => {
     setMessages((messages) => [...messages, data]);
   };
+
   const userListener = (user: string) => {
     toast({
       title: `${user} has connected`,
@@ -100,6 +103,7 @@ export const Message = () => {
   useEffect(() => {
     socket?.on('message', messageListener);
     socket?.on('username', userListener);
+
     return () => {
       socket?.off('message', messageListener);
       socket?.off('username', userListener);
